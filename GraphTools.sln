@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphTools.GroupTags", "GraphTools.GroupTags\GraphTools.GroupTags.csproj", "{6824A6F5-78E5-4922-9FDC-99209A08B6AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphTools.RetireWipeFresh", "GraphTools.RetireWipeFresh\GraphTools.RetireWipeFresh.csproj", "{1960CC0B-7E0A-4360-99CA-3273FCEBC520}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GraphTools.Common", "GraphTools.Common\GraphTools.Common.csproj", "{A2368AE0-62BE-44DF-96A8-0283DC8CF5CA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6824A6F5-78E5-4922-9FDC-99209A08B6AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6824A6F5-78E5-4922-9FDC-99209A08B6AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6824A6F5-78E5-4922-9FDC-99209A08B6AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6824A6F5-78E5-4922-9FDC-99209A08B6AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1960CC0B-7E0A-4360-99CA-3273FCEBC520}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1960CC0B-7E0A-4360-99CA-3273FCEBC520}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1960CC0B-7E0A-4360-99CA-3273FCEBC520}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1960CC0B-7E0A-4360-99CA-3273FCEBC520}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2368AE0-62BE-44DF-96A8-0283DC8CF5CA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2368AE0-62BE-44DF-96A8-0283DC8CF5CA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2368AE0-62BE-44DF-96A8-0283DC8CF5CA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2368AE0-62BE-44DF-96A8-0283DC8CF5CA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
