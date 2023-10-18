@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Azure.Identity" Version="1.9.0" />
+      <PackageReference Include="Azure.Identity" Version="1.10.2" />
       <PackageReference Include="Microsoft.Graph.Beta" Version="5.36.0-preview" />
     </ItemGroup>
 
