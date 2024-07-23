@@ -4,9 +4,12 @@ namespace GraphTools.GroupTags;
 
 public class DeviceRow
 {
-    [Name("Serial number")]
+    [Name("Serial number", "Serienummer")]
     public required string Serial { get; set; }
     
-    [Name("Group tag")]
+    [Name("Group tag", "Groepstag")]
     public string? Tag { get; set; }
+    
+    [Name("Devicename")]
+    public string? Devicename { get; set; }
 }

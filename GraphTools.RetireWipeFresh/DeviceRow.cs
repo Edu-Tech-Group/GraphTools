@@ -11,7 +11,7 @@ public enum Action
 
 public class DeviceRow
 {
-    [Name("Serial number")] public required string Serial { get; set; }
+    [Name("Serial number", "Serienummer")] public required string Serial { get; set; }
 
     [Name("Action")] [EnumIgnoreCase] public Action? Action { get; set; }
     [Name("KeepEnrollmentData")] public bool? KeepEnrollmentData { get; set; }

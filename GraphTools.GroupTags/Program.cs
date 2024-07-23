@@ -43,6 +43,7 @@ await foreach (var deviceRow in csv.GetRecordsAsync<DeviceRow>())
         await graphClient.DeviceManagement.WindowsAutopilotDeviceIdentities[matchingDeviceIdentity.Id].UpdateDeviceProperties.PostAsync(
             new UpdateDevicePropertiesPostRequestBody()
             {
+                DisplayName = deviceRow.Devicename,
                 GroupTag = deviceRow.Tag
             });
     }
