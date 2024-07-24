@@ -36,16 +36,15 @@ using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
 
 await foreach (var deviceRow in csv.GetRecordsAsync<DeviceRow>())
 {
-    var matchingDeviceIdentity = deviceIdentities.FirstOrDefault(x => x.SerialNumber == deviceRow.Serial);
-
-    if (matchingDeviceIdentity != null)
+    foreach (var matchingDeviceIdentity in deviceIdentities.Where(x => x.SerialNumber == deviceRow.Serial))
     {
-        await graphClient.DeviceManagement.WindowsAutopilotDeviceIdentities[matchingDeviceIdentity.Id].UpdateDeviceProperties.PostAsync(
-            new UpdateDevicePropertiesPostRequestBody()
-            {
-                DisplayName = deviceRow.Devicename,
-                GroupTag = deviceRow.Tag
-            });
+        await graphClient.DeviceManagement.WindowsAutopilotDeviceIdentities[matchingDeviceIdentity.Id]
+            .UpdateDeviceProperties.PostAsync(
+                new UpdateDevicePropertiesPostRequestBody
+                {
+                    DisplayName = deviceRow.Devicename,
+                    GroupTag = deviceRow.Tag
+                });
     }
 }
 

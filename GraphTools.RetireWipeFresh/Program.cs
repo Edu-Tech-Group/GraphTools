@@ -38,33 +38,37 @@ using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
 
 await foreach (var deviceRow in csv.GetRecordsAsync<DeviceRow>())
 {
-    var matchingDeviceIdentity = deviceIdentities.FirstOrDefault(x => x.SerialNumber == deviceRow.Serial);
-
-    if (matchingDeviceIdentity != null && deviceRow.Action != null)
+    if (deviceRow.Action != null)
     {
-        switch (deviceRow.Action)
+        foreach (var matchingDeviceIdentity in deviceIdentities.Where(x => x.SerialNumber == deviceRow.Serial))
         {
-            case Action.Wipe:
-                await graphClient.DeviceManagement.ManagedDevices[matchingDeviceIdentity.ManagedDeviceId].Wipe.PostAsync(new WipePostRequestBody
-                {
-                    KeepEnrollmentData = deviceRow.KeepEnrollmentData,
-                    KeepUserData = deviceRow.KeepUserData
-                });
-                break;
-            case Action.Retire:
-                await graphClient.DeviceManagement.ManagedDevices[matchingDeviceIdentity.ManagedDeviceId].Retire.PostAsync();
-                break;
-            case Action.Fresh:
-                await graphClient.DeviceManagement.ManagedDevices[matchingDeviceIdentity.ManagedDeviceId].CleanWindowsDevice.PostAsync(
-                    new CleanWindowsDevicePostRequestBody
-                    {
-                        KeepUserData = deviceRow.KeepUserData
-                    });
-                break;
-            case null:
-                break;
-            default:
-                throw new ArgumentOutOfRangeException();
+            switch (deviceRow.Action)
+            {
+                case Action.Wipe:
+                    await graphClient.DeviceManagement.ManagedDevices[matchingDeviceIdentity.ManagedDeviceId].Wipe
+                        .PostAsync(new WipePostRequestBody
+                        {
+                            KeepEnrollmentData = deviceRow.KeepEnrollmentData,
+                            KeepUserData = deviceRow.KeepUserData
+                        });
+                    break;
+                case Action.Retire:
+                    await graphClient.DeviceManagement.ManagedDevices[matchingDeviceIdentity.ManagedDeviceId].Retire
+                        .PostAsync();
+                    break;
+                case Action.Fresh:
+                    await graphClient.DeviceManagement.ManagedDevices[matchingDeviceIdentity.ManagedDeviceId]
+                        .CleanWindowsDevice.PostAsync(
+                            new CleanWindowsDevicePostRequestBody
+                            {
+                                KeepUserData = deviceRow.KeepUserData
+                            });
+                    break;
+                case null:
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
     }
 }
