@@ -36,12 +36,24 @@ await pageIterator.IterateAsync();
 using var reader = new StreamReader(path);
 using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
 
+long requestCount = 0;
 await foreach (var deviceRow in csv.GetRecordsAsync<DeviceRow>())
 {
     if (deviceRow.Action != null)
     {
         foreach (var matchingDeviceIdentity in deviceIdentities.Where(x => x.SerialNumber == deviceRow.Serial))
         {
+            if (deviceRow.Action == null)
+            {
+                continue;
+            }
+
+            if (requestCount == 99)
+            {
+                await Task.Delay(TimeSpan.FromSeconds(20));
+                requestCount = 0;
+            }
+
             switch (deviceRow.Action)
             {
                 case Action.Wipe:
@@ -69,6 +81,8 @@ await foreach (var deviceRow in csv.GetRecordsAsync<DeviceRow>())
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+
+            requestCount++;
         }
     }
 }

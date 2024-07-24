@@ -34,10 +34,17 @@ await pageIterator.IterateAsync();
 using var reader = new StreamReader(path);
 using var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
 
+long requestCount = 0;
 await foreach (var deviceRow in csv.GetRecordsAsync<DeviceRow>())
 {
     foreach (var matchingDeviceIdentity in deviceIdentities.Where(x => x.SerialNumber == deviceRow.Serial))
     {
+        if (requestCount == 99)
+        {
+            await Task.Delay(TimeSpan.FromSeconds(20));
+            requestCount = 0;
+        }
+        
         await graphClient.DeviceManagement.WindowsAutopilotDeviceIdentities[matchingDeviceIdentity.Id]
             .UpdateDeviceProperties.PostAsync(
                 new UpdateDevicePropertiesPostRequestBody
@@ -45,6 +52,7 @@ await foreach (var deviceRow in csv.GetRecordsAsync<DeviceRow>())
                     DisplayName = deviceRow.Devicename,
                     GroupTag = deviceRow.Tag
                 });
+        requestCount++;
     }
 }
 
