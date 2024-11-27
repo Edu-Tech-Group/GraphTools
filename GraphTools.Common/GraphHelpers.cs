@@ -14,6 +14,6 @@ public static class GraphHelpers
             {
                 Name = "graphtools"
             }
-        }));
+        }), ["DeviceManagementConfiguration.ReadWrite.All"]);
     }
 }
