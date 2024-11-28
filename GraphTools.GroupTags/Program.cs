@@ -61,6 +61,7 @@ try
             catch (ODataError e)
             {
                 Console.WriteLine($"Row with serial: {deviceRow.Serial} failed");
+                Console.WriteLine(e);
             }
 
             requestCount++;
