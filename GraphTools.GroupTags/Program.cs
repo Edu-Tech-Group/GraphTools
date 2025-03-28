@@ -11,7 +11,7 @@ try
 {
     Console.Write("CSV path:");
     var path = Console.ReadLine();
-    
+
     if (path == null)
     {
         Console.WriteLine("Invalid path");
@@ -50,13 +50,20 @@ try
 
             try
             {
-                await graphClient.DeviceManagement.WindowsAutopilotDeviceIdentities[matchingDeviceIdentity.Id]
-                    .UpdateDeviceProperties.PostAsync(
-                        new UpdateDevicePropertiesPostRequestBody
-                        {
-                            DisplayName = deviceRow.Devicename,
-                            GroupTag = deviceRow.Tag
-                        });
+                var update = new UpdateDevicePropertiesPostRequestBody
+                {
+                    GroupTag = deviceRow.Tag
+                };
+
+                if (deviceRow.Devicename != null)
+                {
+                    update.DisplayName = deviceRow.Devicename;
+                }
+
+                await graphClient
+                    .DeviceManagement
+                    .WindowsAutopilotDeviceIdentities[matchingDeviceIdentity.Id]
+                    .UpdateDeviceProperties.PostAsync(update);
             }
             catch (ODataError e)
             {
