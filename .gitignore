@@ -397,5 +397,11 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
+# Workspace-local .NET SDK and CLI state
+.dotnet/
+.dotnet-home/
+dotnet-install.ps1
+artifacts/
+
 # VS Code
 .vscode/

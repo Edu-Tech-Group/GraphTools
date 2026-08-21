@@ -5,15 +5,24 @@ namespace GraphTools.Common;
 
 public static class GraphHelpers
 {
+    private const string ClientId = "f5d69c35-966e-4219-9bf6-9b22f05d4e8a";
+    private const string TenantId = "organizations";
+
     public static GraphServiceClient GetGraphClient()
     {
         return new GraphServiceClient(new DeviceCodeCredential(new DeviceCodeCredentialOptions()
         {
-            ClientId = "9743e9c0-d56a-4f27-84e5-d725213c354c",
+            ClientId = ClientId,
+            TenantId = TenantId,
+            DeviceCodeCallback = (code, _) =>
+            {
+                Console.WriteLine(code.Message);
+                return Task.CompletedTask;
+            },
             TokenCachePersistenceOptions = new TokenCachePersistenceOptions()
             {
                 Name = "graphtools"
             }
-        }), ["DeviceManagementConfiguration.ReadWrite.All"]);
+        }), ["DeviceManagementServiceConfig.ReadWrite.All"]);
     }
 }
